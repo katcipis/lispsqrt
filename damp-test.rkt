@@ -3,4 +3,7 @@
 (require rackunit
          "damp.rkt")
 
-(check-equal? (avgdamp (lambda (x) (* x x)) 2) 3 "DampSignal")
+(define (square x) (* x x))
+(check-equal? (square 2) 4 "SimpleSquare")
+(check-equal? (avgdamp square 2) 3 "DampenedSquare")
+(check-equal? (avgdamp square 0) 0 "DampenedZeroSquare")

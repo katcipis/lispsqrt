@@ -2,7 +2,7 @@
 
 (define (sqrt x)
   (fixed-point
-    (lambda (g) (- (* g g) x))
-    (lambda (guess) (avgdamp (lambda (g) (/ x g)) guess))
+    (lambda (guess) (- (* guess guess) x))
+    (lambda (guess) (avgdamp (lambda (guess) (/ x guess)) guess))
     1
     ))
