@@ -17,6 +17,6 @@
 (define (sqrtnodamp x) (fixed-point sqrtest next 1 precision x))
 (define (sqrtdamp x) (fixed-point sqrtest dampenednext 1 precision x))
 
-(plot (function sqrtnodamp 0 steps #:label "y = sqrt(16)"))
+(plot (function sqrtnodamp 0 steps #:label (format "y = sqrt(~a)" wantroot)))
 
-(plot (function sqrtdamp 0 steps #:label "y = dampened sqrt(16)"))
+(plot (function sqrtdamp 0 steps #:label (format "y = dampened sqrt(~a)" wantroot)))
