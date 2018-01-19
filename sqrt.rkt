@@ -1,14 +1,25 @@
 #lang racket
 
-(define (is-good-enough guess x) (- (* guess guess) x))
+(require "damp.rkt" "fixed-point.rkt")
 
-(define (sqrt-template x next guess precision maxiter)
+(define (sqrt-base x next guess precision maxiter)
   (fixed-point
-    (lambda (guess) (- (* guess guess) x))
+    (lambda (guess) (abs (- (* guess guess) x)))
     next
     guess
     precision
     maxiter
     ))
 
-(provide sqrt-template)
+(define (sqrt-heron x)
+  (sqrt-base
+    x
+    (lambda (guess) (avgdamp
+                      (lambda (guess) (/ x guess))
+                      guess
+                      ))
+    1
+    0.00001
+    1000))
+
+(provide sqrt-heron)
