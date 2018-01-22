@@ -3,10 +3,13 @@
 (require rackunit
          "fixed-point.rkt")
 
-(define (inc x) (+ x 1))
-(define (dec x) (- x 1))
-(define (identity x) x)
-(define epsilon 0.000001)
+(define (newinc precision)
+  (lambda (x)
+    (+ x precision)
+    ))
 
-(check-equal? (fixed-point identity inc 1 epsilon 10) 11 "NotConverging")
-(check-equal? (fixed-point identity dec 1 epsilon 100) 0 "Converging")
+(define (identity x) x)
+(define precision 0.01)
+
+(check-equal? (fixed-point identity (newinc (/ precision 10)) 1 precision 10000000) 1 "Converging")
+(check-equal? (fixed-point identity (newinc 1) 1 precision 9) 10 "NotConverging")
