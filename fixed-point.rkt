@@ -1,12 +1,14 @@
 #lang racket
 
 (define (fixed-point f next x precision maxiter)
-  (if (<= maxiter 0) x
+  (if (<= maxiter 0)
+      x
       (if (<=
             (abs
               (-
                 (f x)
-                (f (next x))))
+                x
+                ))
              precision
             )
           x
