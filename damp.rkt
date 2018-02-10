@@ -1,5 +1,10 @@
 #lang racket
 
-(define (avgdamp f x) (/ (+ (f x) x) 2))
+(define (avg x y) (/ (+ x y) 2))
+
+(define (avgdamp f)
+  (lambda (x)
+    (avg (f x) x)
+    ))
 
 (provide avgdamp)
